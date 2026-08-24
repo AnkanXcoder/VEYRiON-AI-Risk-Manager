@@ -1,7 +1,5 @@
 import json
-import joblib
 import os
-
 from pathlib import Path
 
 from flask import Flask, request, jsonify, send_from_directory
@@ -42,7 +40,147 @@ HIGH_THRESHOLD = 0.19
 
 
 # =========================================================
-# 4. HOME PAGE
+# 4. DEMO TRANSACTIONS
+#
+# These are model-compatible benchmark examples.
+# They allow the deployed API to work WITHOUT
+# train_test_split.pkl.
+# =========================================================
+
+LEGITIMATE_DEMO = {
+    "Time": 155400.0,
+    "Amount": 0.0,
+
+    "V1": 1.87763102653787,
+    "V2": 1.23384772843901,
+    "V3": -1.55615714625486,
+    "V4": 4.37648657970126,
+    "V5": 0.897299673442182,
+    "V6": -0.829882783956245,
+    "V7": 0.510571445731182,
+    "V8": -0.2332812514279,
+    "V9": -1.08956046295809,
+    "V10": 0.187423368255943,
+    "V11": 0.0004703637759045,
+    "V12": 0.0352038942118656,
+    "V13": 0.664548229327016,
+    "V14": -2.94786970023766,
+    "V15": -1.29046615706958,
+    "V16": 1.14072539363065,
+    "V17": 1.85126093600225,
+    "V18": 0.205154128243836,
+    "V19": -1.91109912141651,
+    "V20": -0.193509038180537,
+    "V21": -0.181469450784463,
+    "V22": -0.286038215429858,
+    "V23": 0.158538183274642,
+    "V24": 0.104445951640915,
+    "V25": 0.0330868308568062,
+    "V26": -0.0627383090152664,
+    "V27": 0.0101411456085235,
+    "V28": 0.0165136506440117
+}
+
+
+REVIEW_DEMO = {
+    "Time": 61290.0,
+    "Amount": 11.5,
+
+    "V1": 1.2288211502379,
+    "V2": -0.0634077165201056,
+    "V3": 0.274145142235826,
+    "V4": 0.647465021810117,
+    "V5": -0.0481345611508765,
+    "V6": 0.372073028593297,
+    "V7": -0.22423058741343,
+    "V8": 0.0799390492455152,
+    "V9": 0.640758817066441,
+    "V10": -0.273053702248503,
+    "V11": -1.25272793883718,
+    "V12": 0.465078770741453,
+    "V13": 0.400502115321077,
+    "V14": -0.292841860600363,
+    "V15": -0.10177401599731,
+    "V16": -0.399835897844616,
+    "V17": 0.0343356567914817,
+    "V18": -0.783550254934187,
+    "V19": 0.141344900433949,
+    "V20": -0.0965659023514416,
+    "V21": -0.129554448055005,
+    "V22": -0.0837793282428063,
+    "V23": -0.151661473916324,
+    "V24": -0.700371597289218,
+    "V25": 0.598550164523483,
+    "V26": 0.491409070563651,
+    "V27": 0.0029892597250263,
+    "V28": 0.0017822861144491
+}
+
+
+# =========================================================
+# 5. HELPER FUNCTIONS
+# =========================================================
+
+def validate_transaction(data):
+    """
+    Make sure all model features are present.
+    """
+
+    if not isinstance(data, dict):
+        raise ValueError("Transaction must be a JSON object.")
+
+    missing_features = [
+        feature
+        for feature in MODEL_FEATURES
+        if feature not in data
+    ]
+
+    if missing_features:
+        raise ValueError(
+            "Missing required features: "
+            + ", ".join(missing_features)
+        )
+
+    return data
+
+
+def transaction_to_json(transaction):
+    """
+    Convert transaction values to normal JSON numbers.
+    """
+
+    return {
+        feature: float(transaction[feature])
+        for feature in MODEL_FEATURES
+    }
+
+
+def load_fraud_demo():
+    """
+    Load the fraud demonstration transaction
+    from data/fraud_api_sample.json.
+    """
+
+    sample_path = DATA_DIR / "fraud_api_sample.json"
+
+    if not sample_path.exists():
+        raise FileNotFoundError(
+            f"Fraud demo sample not found: {sample_path}"
+        )
+
+    with open(
+        sample_path,
+        "r",
+        encoding="utf-8"
+    ) as file:
+
+        sample = json.load(file)
+
+    return validate_transaction(sample)
+
+
+# =========================================================
+# 6. HOME PAGE
 # =========================================================
 
 @app.route("/", methods=["GET"])
@@ -64,7 +202,7 @@ def home():
 
 
 # =========================================================
-# 5. HEALTH CHECK
+# 7. HEALTH CHECK
 # =========================================================
 
 @app.route("/api/health", methods=["GET"])
@@ -94,14 +232,13 @@ def health():
 
             "block_at_or_above":
                 HIGH_THRESHOLD
-
         }
 
     }), 200
 
 
 # =========================================================
-# 6. PREDICTION API
+# 8. PREDICTION API
 # =========================================================
 
 @app.route("/predict", methods=["POST"])
@@ -114,30 +251,20 @@ def predict():
         if not data:
 
             return jsonify({
-
-                "error":
-                    "Request body is empty"
-
+                "error": "Request body is empty"
             }), 400
 
+        data = validate_transaction(data)
 
         result = predict_fraud(data)
 
-
-        return jsonify(
-            result
-        ), 200
-
+        return jsonify(result), 200
 
     except ValueError as error:
 
         return jsonify({
-
-            "error":
-                str(error)
-
+            "error": str(error)
         }), 400
-
 
     except Exception as error:
 
@@ -153,184 +280,17 @@ def predict():
 
 
 # =========================================================
-# 7. LOAD TEST DATA
+# 9. DEMO FRAUD TRANSACTION
 # =========================================================
 
-def load_test_data():
-
-    split_path = (
-        MODELS_DIR
-        / "train_test_split.pkl"
-    )
-
-
-    if not split_path.exists():
-
-        raise FileNotFoundError(
-
-            f"Train/test split not found: "
-            f"{split_path}"
-
-        )
-
-
-    split_data = joblib.load(
-        split_path
-    )
-
-
-    X_test = split_data["X_test"]
-
-    y_test = split_data["y_test"]
-
-
-    return X_test, y_test
-
-
-# =========================================================
-# 8. CONVERT TRANSACTION TO JSON
-# =========================================================
-
-def transaction_to_json(transaction):
-
-    return {
-
-        feature:
-            float(transaction[feature])
-
-        for feature in MODEL_FEATURES
-
-    }
-
-
-# =========================================================
-# 9. LOAD MODEL AND SCALER
-# =========================================================
-
-def load_model_and_scaler():
-
-    model_path = (
-        MODELS_DIR
-        / "xgboost_candidate.pkl"
-    )
-
-    scaler_path = (
-        MODELS_DIR
-        / "scaler.pkl"
-    )
-
-
-    if not model_path.exists():
-
-        raise FileNotFoundError(
-
-            f"XGBoost model not found: "
-            f"{model_path}"
-
-        )
-
-
-    if not scaler_path.exists():
-
-        raise FileNotFoundError(
-
-            f"Scaler not found: "
-            f"{scaler_path}"
-
-        )
-
-
-    model = joblib.load(
-        model_path
-    )
-
-    scaler = joblib.load(
-        scaler_path
-    )
-
-
-    return model, scaler
-
-
-# =========================================================
-# 10. CALCULATE TEST SET PROBABILITIES
-# =========================================================
-
-def get_test_probabilities():
-
-    X_test, y_test = load_test_data()
-
-    model, scaler = load_model_and_scaler()
-
-
-    X_test_ordered = X_test[
-        MODEL_FEATURES
-    ]
-
-
-    X_test_scaled = scaler.transform(
-        X_test_ordered
-    )
-
-
-    probabilities = model.predict_proba(
-        X_test_scaled
-    )[:, 1]
-
-
-    return (
-        X_test,
-        y_test,
-        probabilities
-    )
-
-
-# =========================================================
-# 11. DEMO FRAUD TRANSACTION
-# =========================================================
-
-@app.route(
-    "/demo/fraud",
-    methods=["GET"]
-)
+@app.route("/demo/fraud", methods=["GET"])
 def demo_fraud():
 
     try:
 
-        sample_path = (
-            DATA_DIR
-            / "fraud_api_sample.json"
-        )
+        fraud_sample = load_fraud_demo()
 
-
-        if not sample_path.exists():
-
-            return jsonify({
-
-                "error":
-                    "Fraud demo sample not found",
-
-                "details":
-                    str(sample_path)
-
-            }), 404
-
-
-        with open(
-            sample_path,
-            "r",
-            encoding="utf-8"
-        ) as file:
-
-            fraud_sample = json.load(
-                file
-            )
-
-
-        return jsonify(
-            fraud_sample
-        ), 200
-
+        return jsonify(fraud_sample), 200
 
     except Exception as error:
 
@@ -346,103 +306,24 @@ def demo_fraud():
 
 
 # =========================================================
-# 12. DEMO LEGITIMATE TRANSACTION
+# 10. DEMO LEGITIMATE TRANSACTION
 # =========================================================
 
-@app.route(
-    "/demo/legitimate",
-    methods=["GET"]
-)
+@app.route("/demo/legitimate", methods=["GET"])
 def demo_legitimate():
 
     try:
 
-        (
-            X_test,
-            y_test,
-            probabilities
-        ) = get_test_probabilities()
-
-
-        if hasattr(
-            y_test,
-            "to_numpy"
-        ):
-
-            y_values = y_test.to_numpy()
-
-        else:
-
-            y_values = y_test
-
-
-        legitimate_mask = (
-
-            (y_values == 0)
-
-            &
-
-            (
-                probabilities
-                < MEDIUM_THRESHOLD
-            )
-
-        )
-
-
-        matching_positions = [
-
-            i
-
-            for i, matched
-            in enumerate(
-                legitimate_mask
-            )
-
-            if matched
-
-        ]
-
-
-        if not matching_positions:
-
-            return jsonify({
-
-                "error":
-                    "No low-risk legitimate "
-                    "transaction found."
-
-            }), 404
-
-
-        position = matching_positions[0]
-
-
-        transaction_index = (
-            X_test.index[position]
-        )
-
-
-        transaction = X_test.loc[
-            transaction_index,
-            MODEL_FEATURES
-        ]
-
-
         return jsonify(
-            transaction_to_json(
-                transaction
-            )
+            LEGITIMATE_DEMO
         ), 200
-
 
     except Exception as error:
 
         return jsonify({
 
             "error":
-                "Demo legitimate sample "
-                "could not be loaded",
+                "Demo legitimate sample could not be loaded",
 
             "details":
                 str(error)
@@ -451,174 +332,24 @@ def demo_legitimate():
 
 
 # =========================================================
-# 13. DEMO REVIEW TRANSACTION
+# 11. DEMO REVIEW TRANSACTION
 # =========================================================
 
-@app.route(
-    "/demo/review",
-    methods=["GET"]
-)
+@app.route("/demo/review", methods=["GET"])
 def demo_review():
 
     try:
 
-        (
-            X_test,
-            y_test,
-            probabilities
-        ) = get_test_probabilities()
-
-
-        if hasattr(
-            y_test,
-            "to_numpy"
-        ):
-
-            y_values = y_test.to_numpy()
-
-        else:
-
-            y_values = y_test
-
-
-        # -------------------------------------------------
-        # Prefer legitimate transaction in REVIEW range
-        # -------------------------------------------------
-
-        review_mask = (
-
-            (y_values == 0)
-
-            &
-
-            (
-                probabilities
-                >= MEDIUM_THRESHOLD
-            )
-
-            &
-
-            (
-                probabilities
-                < HIGH_THRESHOLD
-            )
-
-        )
-
-
-        matching_positions = [
-
-            i
-
-            for i, matched
-            in enumerate(
-                review_mask
-            )
-
-            if matched
-
-        ]
-
-
-        # -------------------------------------------------
-        # Fallback: any transaction in REVIEW range
-        # -------------------------------------------------
-
-        if not matching_positions:
-
-            review_mask = (
-
-                (
-                    probabilities
-                    >= MEDIUM_THRESHOLD
-                )
-
-                &
-
-                (
-                    probabilities
-                    < HIGH_THRESHOLD
-                )
-
-            )
-
-
-            matching_positions = [
-
-                i
-
-                for i, matched
-                in enumerate(
-                    review_mask
-                )
-
-                if matched
-
-            ]
-
-
-        if not matching_positions:
-
-            return jsonify({
-
-                "error":
-                    "No real review-range "
-                    "transaction found.",
-
-                "details":
-                    "No transaction in the test "
-                    "set has probability between "
-                    "1% and 19%."
-
-            }), 404
-
-
-        # -------------------------------------------------
-        # Select transaction closest to 10%
-        # -------------------------------------------------
-
-        target_probability = 0.10
-
-
-        position = min(
-
-            matching_positions,
-
-            key=lambda i:
-
-                abs(
-                    probabilities[i]
-                    - target_probability
-                )
-
-        )
-
-
-        transaction_index = (
-            X_test.index[position]
-        )
-
-
-        transaction = X_test.loc[
-            transaction_index,
-            MODEL_FEATURES
-        ]
-
-
         return jsonify(
-            transaction_to_json(
-                transaction
-            )
+            REVIEW_DEMO
         ), 200
-
 
     except Exception as error:
 
         return jsonify({
 
             "error":
-                "Demo review sample "
-                "could not be loaded",
+                "Demo review sample could not be loaded",
 
             "details":
                 str(error)
@@ -627,20 +358,17 @@ def demo_review():
 
 
 # =========================================================
-# 14. LEGACY MEDIUM ENDPOINT
+# 12. LEGACY MEDIUM ENDPOINT
 # =========================================================
 
-@app.route(
-    "/demo/medium",
-    methods=["GET"]
-)
+@app.route("/demo/medium", methods=["GET"])
 def demo_medium():
 
     return demo_review()
 
 
 # =========================================================
-# 15. START SERVER
+# 13. START SERVER
 # =========================================================
 
 if __name__ == "__main__":
@@ -659,7 +387,6 @@ if __name__ == "__main__":
     print("=" * 60)
     print()
 
-
     app.run(
 
         host="0.0.0.0",
@@ -672,5 +399,4 @@ if __name__ == "__main__":
         ),
 
         debug=False
-
     )
