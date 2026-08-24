@@ -1,0 +1,5190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="VEYRiON AI Transaction Risk Intelligence. Defense-only fraud-risk decision support.">
+<title>VEYRiON | AI Transaction Risk Intelligence</title>
+
+<style>
+:root{
+  --bg:#050a12;
+  --bg2:#07111f;
+  --panel:#0a1422;
+  --panel2:#0d1929;
+  --panel3:#101e31;
+  --line:rgba(148,163,184,.14);
+  --line2:rgba(96,165,250,.28);
+  --text:#f7fbff;
+  --muted:#8ea0b8;
+  --muted2:#60728b;
+  --blue:#5aa9ff;
+  --cyan:#57d5ff;
+  --green:#35d399;
+  --yellow:#f5c451;
+  --red:#ff626b;
+  --purple:#9b7cff;
+  --shadow:0 25px 80px rgba(0,0,0,.34);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(59,130,246,.14),transparent 28%),
+    radial-gradient(circle at 88% 14%,rgba(87,213,255,.07),transparent 24%),
+    radial-gradient(circle at 52% 65%,rgba(155,124,255,.055),transparent 30%),
+    var(--bg);
+  line-height:1.5;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.container{
+  width:min(1240px,calc(100% - 40px));
+  margin:auto;
+}
+
+/* NAVBAR */
+
+.nav{
+  height:76px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(5,10,18,.86);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.brand-mark{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(90,169,255,.35);
+  background:linear-gradient(
+    145deg,
+    rgba(90,169,255,.22),
+    rgba(87,213,255,.05)
+  );
+  box-shadow:0 10px 30px rgba(59,130,246,.12);
+}
+
+.brand-mark svg{
+  width:22px;
+}
+
+.brand-name{
+  font-size:15px;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+.brand-sub{
+  font-size:8px;
+  color:var(--muted2);
+  font-weight:800;
+  letter-spacing:.12em;
+  margin-top:1px;
+}
+
+.nav-links{
+  display:flex;
+  gap:24px;
+}
+
+.nav-links a{
+  font-size:11px;
+  font-weight:800;
+  color:#8293a9;
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  color:#fff;
+}
+
+.nav-status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:10px;
+  font-weight:900;
+  color:#7fe5b7;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 14px rgba(53,211,153,.8);
+}
+
+.nav-status.offline{
+  color:#ff8b91;
+}
+
+.nav-status.offline .status-dot{
+  background:var(--red);
+  box-shadow:0 0 14px rgba(255,98,107,.65);
+}
+
+/* HERO */
+
+.hero{
+  padding:78px 0 30px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.06fr .94fr;
+  gap:46px;
+  align-items:center;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 10px;
+  border:1px solid rgba(90,169,255,.22);
+  border-radius:999px;
+  background:rgba(90,169,255,.055);
+  color:#8cc7ff;
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+.eyebrow::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 10px rgba(87,213,255,.8);
+}
+
+.hero h1{
+  margin-top:19px;
+  font-size:clamp(44px,6vw,76px);
+  line-height:.96;
+  letter-spacing:-.065em;
+  max-width:760px;
+}
+
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(
+    100deg,
+    #69aaff,
+    #67e8f9,
+    #a78bfa
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:650px;
+  margin-top:22px;
+  color:#91a2b8;
+  font-size:15px;
+  line-height:1.85;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  margin-top:28px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:12px 16px;
+  background:#0c1727;
+  color:#dbeafe;
+  font-size:11px;
+  font-weight:900;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:var(--line2);
+  background:#102036;
+}
+
+.btn-primary{
+  border-color:rgba(90,169,255,.42);
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;
+  box-shadow:0 12px 32px rgba(37,99,235,.18);
+}
+
+.btn-primary:hover{
+  background:linear-gradient(135deg,#1d4ed8,#2563eb);
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.hero-note{
+  display:flex;
+  gap:18px;
+  margin-top:20px;
+  flex-wrap:wrap;
+  color:#71839b;
+  font-size:9px;
+  font-weight:750;
+}
+
+.hero-note span{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.hero-note i{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#60728b;
+}
+
+/* HERO CARD */
+
+.hero-card{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:21px;
+  background:linear-gradient(145deg,#0d192a,#081321);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.hero-card::after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  right:-130px;
+  top:-130px;
+  border-radius:50%;
+  background:rgba(90,169,255,.1);
+  filter:blur(12px);
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  z-index:1;
+}
+
+.tiny-label{
+  font-size:9px;
+  color:#73859d;
+  font-weight:950;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+.live-pill{
+  font-size:9px;
+  color:#7fe5b7;
+  font-weight:950;
+}
+
+.live-pill::before{
+  content:"●";
+  margin-right:5px;
+}
+
+.hero-risk{
+  display:grid;
+  grid-template-columns:1fr 150px;
+  gap:20px;
+  align-items:center;
+  margin-top:25px;
+}
+
+.tx-id{
+  font-size:8px;
+  color:#60728b;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.tx-title{
+  font-size:18px;
+  font-weight:950;
+  margin-top:5px;
+}
+
+.tx-amount{
+  font-size:31px;
+  font-weight:950;
+  letter-spacing:-.04em;
+  margin-top:15px;
+}
+
+.tx-meta{
+  font-size:9px;
+  color:#71839b;
+  margin-top:4px;
+}
+
+.gauge{
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(
+    from 225deg,
+    var(--red) 0deg,
+    #ff9b58 126deg,
+    #1c2a3d 126deg,
+    #1c2a3d 270deg,
+    transparent 270deg
+  );
+  position:relative;
+}
+
+.gauge::after{
+  content:"";
+  position:absolute;
+  inset:11px;
+  border-radius:50%;
+  background:#091421;
+}
+
+.gauge-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.gauge-number{
+  font-size:27px;
+  font-weight:950;
+}
+
+.gauge-label{
+  font-size:8px;
+  color:#8191a7;
+}
+
+.gauge-risk{
+  font-size:8px;
+  color:#ff737b;
+  font-weight:950;
+  margin-top:4px;
+}
+
+.hero-decision{
+  margin-top:21px;
+  padding:12px 13px;
+  border-radius:11px;
+  border:1px solid rgba(255,98,107,.18);
+  background:rgba(255,98,107,.055);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.hero-decision span{
+  font-size:9px;
+  color:#8293a9;
+}
+
+.hero-decision strong{
+  font-size:11px;
+  color:#ff737b;
+}
+
+.hero-foot{
+  margin-top:12px;
+  color:#647891;
+  font-size:8px;
+}
+
+/* TRUST */
+
+.trust-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  margin-top:40px;
+}
+
+.trust{
+  padding:17px 18px;
+  border-right:1px solid var(--line);
+}
+
+.trust:last-child{
+  border-right:0;
+}
+
+.trust strong{
+  display:block;
+  font-size:18px;
+  font-weight:950;
+  letter-spacing:-.03em;
+}
+
+.trust span{
+  display:block;
+  color:#71839b;
+  font-size:9px;
+  margin-top:3px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+/* SECTIONS */
+
+.section{
+  padding:76px 0 0;
+  scroll-margin-top:95px;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin-bottom:18px;
+}
+
+.section-kicker{
+  font-size:9px;
+  color:#72baff;
+  font-weight:950;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.section h2{
+  font-size:31px;
+  letter-spacing:-.045em;
+  margin-top:5px;
+}
+
+.section-head p{
+  max-width:600px;
+  color:#73859d;
+  font-size:10px;
+  line-height:1.7;
+}
+
+.card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(145deg,#0c1726,#091320);
+  box-shadow:0 18px 55px rgba(0,0,0,.18);
+}
+
+.console{
+  display:grid;
+  grid-template-columns:260px 1fr 300px;
+  gap:12px;
+}
+
+.pad{
+  padding:18px;
+}
+
+.card-title{
+  font-size:12px;
+  font-weight:950;
+}
+
+.card-sub{
+  font-size:9px;
+  color:#687b94;
+  line-height:1.6;
+  margin-top:4px;
+}
+
+/* SCENARIOS */
+
+.scenario{
+  width:100%;
+  text-align:left;
+  margin-top:10px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#0a1421;
+  color:#fff;
+  transition:.2s;
+}
+
+.scenario:hover{
+  border-color:rgba(90,169,255,.3);
+  background:#0f1d2f;
+  transform:translateY(-1px);
+}
+
+.scenario.active{
+  border-color:rgba(90,169,255,.48);
+  background:rgba(90,169,255,.07);
+  box-shadow:inset 0 0 0 1px rgba(90,169,255,.08);
+}
+
+.scenario-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:10px;
+  font-weight:950;
+}
+
+.scenario-desc{
+  font-size:8px;
+  color:#71839b;
+  margin-top:4px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  flex:none;
+}
+
+.dot.red{
+  background:var(--red);
+  box-shadow:0 0 9px rgba(255,98,107,.4);
+}
+
+.dot.yellow{
+  background:var(--yellow);
+}
+
+.dot.green{
+  background:var(--green);
+}
+
+.small-note{
+  margin-top:12px;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:#70829a;
+  font-size:8.5px;
+  line-height:1.65;
+  background:rgba(255,255,255,.018);
+}
+
+/* TRANSACTION */
+
+.transaction-card{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.tx-header{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:start;
+}
+
+.demo-tag{
+  padding:5px 8px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:#7890aa;
+  font-size:8px;
+  font-weight:900;
+}
+
+.tx-main{
+  margin-top:27px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.info-box{
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.018);
+}
+
+.info-label{
+  font-size:8px;
+  color:#647891;
+  text-transform:uppercase;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.info-value{
+  font-size:14px;
+  font-weight:950;
+  margin-top:4px;
+}
+
+.info-help{
+  font-size:8px;
+  color:#647891;
+  margin-top:2px;
+}
+
+.transaction-actions{
+  margin-top:auto;
+  display:flex;
+  gap:8px;
+  padding-top:20px;
+}
+
+.transaction-actions .btn{
+  flex:1;
+}
+
+/* RESULT */
+
+.result-card{
+  min-height:100%;
+  position:relative;
+  overflow:hidden;
+}
+
+.result-card.high{
+  border-color:rgba(255,98,107,.24);
+}
+
+.result-card.medium{
+  border-color:rgba(245,196,81,.24);
+}
+
+.result-card.low{
+  border-color:rgba(53,211,153,.24);
+}
+
+.result-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.result-status{
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.1em;
+  color:#72859e;
+}
+
+.risk-badge{
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:8px;
+  font-weight:950;
+  border:1px solid var(--line);
+}
+
+.risk-badge.high{
+  color:#ff7c83;
+  background:rgba(255,98,107,.08);
+  border-color:rgba(255,98,107,.18);
+}
+
+.risk-badge.medium{
+  color:#ffd46a;
+  background:rgba(245,196,81,.08);
+  border-color:rgba(245,196,81,.18);
+}
+
+.risk-badge.low{
+  color:#72e4b0;
+  background:rgba(53,211,153,.08);
+  border-color:rgba(53,211,153,.18);
+}
+
+.probability{
+  font-size:48px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.06em;
+  margin-top:28px;
+}
+
+.probability-label{
+  font-size:9px;
+  color:#72859e;
+  margin-top:6px;
+}
+
+.result-bar{
+  height:7px;
+  border-radius:999px;
+  background:#152336;
+  margin-top:19px;
+  overflow:hidden;
+}
+
+.result-bar-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(
+    90deg,
+    #35d399,
+    #f5c451,
+    #ff626b
+  );
+  transition:width .7s ease;
+}
+
+.decision-box{
+  margin-top:20px;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018);
+}
+
+.decision-label{
+  font-size:8px;
+  color:#71839b;
+  text-transform:uppercase;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+
+.decision-value{
+  font-size:18px;
+  font-weight:950;
+  margin-top:3px;
+}
+
+.decision-copy{
+  font-size:8.5px;
+  color:#7b8da5;
+  line-height:1.6;
+  margin-top:5px;
+}
+
+.result-footer{
+  margin-top:13px;
+  font-size:8px;
+  color:#60728b;
+}
+
+.error-box{
+  margin-top:12px;
+  padding:10px;
+  border-radius:9px;
+  background:rgba(255,98,107,.06);
+  border:1px solid rgba(255,98,107,.15);
+  color:#ff9aa0;
+  font-size:8.5px;
+  display:none;
+}
+
+/* POLICY */
+
+.policy{
+  margin-top:12px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(145deg,#0c1726,#091320);
+}
+
+.policy-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:end;
+}
+
+.policy-head h3{
+  font-size:13px;
+}
+
+.policy-head p{
+  font-size:8.5px;
+  color:#687b94;
+  max-width:620px;
+}
+
+.policy-track{
+  margin-top:19px;
+  height:48px;
+  border-radius:12px;
+  display:grid;
+  grid-template-columns:1fr 2fr 3fr;
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+
+.policy-segment{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+
+.policy-segment:last-child{
+  border-right:0;
+}
+
+.policy-segment strong{
+  font-size:10px;
+}
+
+.policy-segment span{
+  font-size:8px;
+  color:#72859e;
+  margin-top:2px;
+}
+
+.policy-segment.low{
+  background:rgba(53,211,153,.05);
+}
+
+.policy-segment.med{
+  background:rgba(245,196,81,.05);
+}
+
+.policy-segment.high{
+  background:rgba(255,98,107,.055);
+}
+
+.policy-note{
+  margin-top:10px;
+  font-size:8px;
+  color:#60728b;
+}
+
+/* PIPELINE */
+
+.pipeline{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:0;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.step{
+  padding:20px 16px;
+  background:linear-gradient(145deg,#0c1726,#091320);
+  border-right:1px solid var(--line);
+  position:relative;
+}
+
+.step:last-child{
+  border-right:0;
+}
+
+.step-num{
+  font-size:9px;
+  color:#5aa9ff;
+  font-weight:950;
+  letter-spacing:.1em;
+}
+
+.step-icon{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:rgba(90,169,255,.08);
+  border:1px solid rgba(90,169,255,.16);
+  margin-top:14px;
+  color:#9bcaff;
+}
+
+.step h3{
+  font-size:11px;
+  margin-top:11px;
+}
+
+.step p{
+  font-size:8.5px;
+  color:#6f8199;
+  line-height:1.6;
+  margin-top:4px;
+}
+
+.step::after{
+  content:"→";
+  position:absolute;
+  right:-8px;
+  top:51%;
+  z-index:2;
+  color:#5a7190;
+  background:#0a1422;
+  border:1px solid var(--line);
+  border-radius:50%;
+  width:17px;
+  height:17px;
+  display:grid;
+  place-items:center;
+  font-size:9px;
+}
+
+.step:last-child::after{
+  display:none;
+}
+
+/* SHAP */
+
+.explain-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.shap-card,
+.transparency-card{
+  padding:20px;
+}
+
+.shap-list{
+  margin-top:16px;
+  display:grid;
+  gap:10px;
+}
+
+.shap-row{
+  display:grid;
+  grid-template-columns:48px 1fr 70px;
+  gap:10px;
+  align-items:center;
+}
+
+.shap-feature{
+  font-size:9px;
+  font-weight:950;
+  color:#dce7f4;
+}
+
+.shap-track{
+  height:8px;
+  border-radius:999px;
+  background:#152336;
+  overflow:hidden;
+}
+
+.shap-fill{
+  height:100%;
+  border-radius:999px;
+}
+
+.shap-fill.pos{
+  background:linear-gradient(90deg,#ff7b82,#ff626b);
+}
+
+.shap-fill.neg{
+  background:linear-gradient(90deg,#4ca7ff,#57d5ff);
+}
+
+.shap-value{
+  text-align:right;
+  font-size:8.5px;
+  font-weight:900;
+}
+
+.shap-value.pos{
+  color:#ff7c83;
+}
+
+.shap-value.neg{
+  color:#69c7ff;
+}
+
+.legend{
+  display:flex;
+  gap:16px;
+  margin-top:14px;
+  font-size:8px;
+  color:#71839b;
+}
+
+.legend span{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.legend i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+}
+
+.legend .up{
+  background:var(--red);
+}
+
+.legend .down{
+  background:var(--cyan);
+}
+
+.technical-note{
+  margin-top:15px;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018);
+  font-size:8.5px;
+  color:#71839b;
+  line-height:1.65;
+}
+
+.technical-note strong{
+  color:#b8c7d9;
+}
+
+/* METRICS */
+
+.metrics-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+.metric{
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:linear-gradient(145deg,#0c1726,#091320);
+}
+
+.metric-value{
+  font-size:24px;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+
+.metric-label{
+  font-size:8px;
+  color:#71839b;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:900;
+  margin-top:4px;
+}
+
+.metric-note{
+  font-size:8px;
+  color:#566a84;
+  margin-top:8px;
+}
+
+.evaluation-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+.eval-card{
+  padding:19px;
+}
+
+.eval-card h3{
+  font-size:12px;
+}
+
+.eval-card p{
+  font-size:8.5px;
+  color:#71839b;
+  margin-top:4px;
+}
+
+.matrix{
+  margin-top:16px;
+  display:grid;
+  grid-template-columns:110px 1fr 1fr;
+  grid-template-rows:32px 72px 72px;
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.matrix div{
+  background:#0a1421;
+  display:grid;
+  place-items:center;
+  text-align:center;
+}
+
+.matrix .head{
+  font-size:8px;
+  color:#72859e;
+  font-weight:900;
+}
+
+.matrix .axis{
+  font-size:8px;
+  color:#72859e;
+  font-weight:900;
+}
+
+.matrix .cell strong{
+  font-size:18px;
+}
+
+.matrix .cell span{
+  font-size:7px;
+  color:#687b94;
+}
+
+.cell.tp{
+  background:rgba(53,211,153,.05);
+}
+
+.cell.fn{
+  background:rgba(255,98,107,.05);
+}
+
+.cell.fp{
+  background:rgba(245,196,81,.045);
+}
+
+.evaluation-note{
+  margin-top:12px;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  color:#71839b;
+  font-size:8.5px;
+  line-height:1.65;
+}
+
+/* IMPACT */
+
+.impact-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.impact{
+  padding:19px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(145deg,#0c1726,#091320);
+}
+
+.impact .num{
+  font-size:26px;
+  font-weight:950;
+}
+
+.impact .label{
+  font-size:8px;
+  color:#71839b;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:900;
+  margin-top:3px;
+}
+
+.impact .desc{
+  font-size:8.5px;
+  color:#60728b;
+  line-height:1.6;
+  margin-top:8px;
+}
+
+.cost-box{
+  margin-top:12px;
+  padding:18px;
+  border:1px solid rgba(90,169,255,.17);
+  border-radius:17px;
+  background:linear-gradient(
+    145deg,
+    rgba(90,169,255,.06),
+    rgba(87,213,255,.02)
+  );
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+}
+
+.cost-item{
+  padding-right:12px;
+  border-right:1px solid var(--line);
+}
+
+.cost-item:last-child{
+  border-right:0;
+}
+
+.cost-item span{
+  font-size:8px;
+  color:#71839b;
+  text-transform:uppercase;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.cost-item strong{
+  display:block;
+  font-size:22px;
+  margin-top:4px;
+}
+
+.cost-item p{
+  font-size:8px;
+  color:#60728b;
+  margin-top:4px;
+}
+
+/* ARCHITECTURE */
+
+.arch{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:0;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.arch-item{
+  padding:18px 14px;
+  background:#0b1624;
+  border-right:1px solid var(--line);
+  text-align:center;
+}
+
+.arch-item:last-child{
+  border-right:0;
+}
+
+.arch-icon{
+  width:38px;
+  height:38px;
+  margin:auto;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(90,169,255,.18);
+  background:rgba(90,169,255,.06);
+  color:#a4d1ff;
+}
+
+.arch-item strong{
+  display:block;
+  font-size:10px;
+  margin-top:10px;
+}
+
+.arch-item span{
+  display:block;
+  font-size:8px;
+  color:#667991;
+  margin-top:3px;
+}
+
+.stack{
+  margin-top:12px;
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.tag{
+  padding:7px 9px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#0a1421;
+  color:#9db0c7;
+  font-size:8px;
+  font-weight:850;
+}
+
+/* TRANSPARENCY */
+
+.transparency-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.info-list{
+  display:grid;
+  gap:10px;
+  margin-top:15px;
+}
+
+.info-line{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--line);
+}
+
+.info-line:last-child{
+  border-bottom:0;
+  padding-bottom:0;
+}
+
+.info-line span{
+  font-size:8.5px;
+  color:#71839b;
+}
+
+.info-line strong{
+  text-align:right;
+  font-size:8.5px;
+  color:#d7e2ef;
+}
+
+.warning{
+  padding:14px;
+  border-radius:12px;
+  border:1px solid rgba(245,196,81,.17);
+  background:rgba(245,196,81,.045);
+  color:#b7a16b;
+  font-size:8.5px;
+  line-height:1.7;
+  margin-top:15px;
+}
+
+.warning strong{
+  color:#f5d477;
+}
+
+/* CSV */
+
+.advanced{
+  margin-top:12px;
+}
+
+.advanced summary{
+  list-style:none;
+  cursor:pointer;
+  padding:16px 18px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#0b1624;
+  font-size:10px;
+  font-weight:900;
+  color:#b8c7d9;
+}
+
+.advanced summary::-webkit-details-marker{
+  display:none;
+}
+
+.advanced summary::after{
+  content:"+";
+  float:right;
+  color:#6f829b;
+}
+
+.advanced[open] summary::after{
+  content:"−";
+}
+
+.advanced-body{
+  padding:18px;
+  border:1px solid var(--line);
+  border-top:0;
+  border-radius:0 0 15px 15px;
+  background:#091320;
+}
+
+.upload-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.file-input{
+  color:#8293a9;
+  font-size:9px;
+}
+
+.file-input::file-selector-button{
+  border:1px solid var(--line2);
+  border-radius:8px;
+  background:#0d1a2b;
+  color:#dbeafe;
+  padding:8px 10px;
+  margin-right:7px;
+  font-size:9px;
+  font-weight:850;
+  cursor:pointer;
+}
+
+.csv-row-tools{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.csv-row-input{
+  width:180px;
+  padding:10px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  background:#0b1624;
+  color:#dce7f4;
+  font-size:9px;
+  outline:none;
+}
+
+.csv-row-input:focus{
+  border-color:#2f7df4;
+  box-shadow:0 0 0 3px rgba(47,125,244,.12);
+}
+
+.csv-progress{
+  height:4px;
+  background:#16263a;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.csv-progress-fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#2f7df4,#55b6ff);
+  transition:width .15s ease;
+}
+
+.csv-select{
+  width:100%;
+  margin-top:12px;
+  padding:10px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  background:#0b1624;
+  color:#dce7f4;
+  font-size:9px;
+}
+
+.csv-status{
+  margin-top:8px;
+  color:#687b94;
+  font-size:8px;
+}
+
+/* FOOTER */
+
+.footer{
+  margin-top:90px;
+  padding:30px 0 45px;
+  border-top:1px solid var(--line);
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.footer-brand{
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+.footer p{
+  font-size:8.5px;
+  color:#60728b;
+  line-height:1.7;
+  max-width:620px;
+  margin-top:7px;
+}
+
+.footer-right{
+  text-align:right;
+}
+
+.footer-right a{
+  font-size:9px;
+  color:#7baee1;
+  margin-left:14px;
+}
+
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-top:25px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  font-size:8px;
+  color:#566a84;
+}
+
+.toast{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:200;
+  max-width:330px;
+  padding:11px 14px;
+  border-radius:11px;
+  background:#101e30;
+  border:1px solid var(--line2);
+  color:#dbeafe;
+  font-size:9px;
+  font-weight:800;
+  box-shadow:var(--shadow);
+  transform:translateY(15px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.loading{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+
+.spinner{
+  width:12px;
+  height:12px;
+  border:2px solid rgba(255,255,255,.2);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.loaded-dot{
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--green);
+  margin-right:5px;
+  box-shadow:0 0 8px rgba(53,211,153,.7);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+  .console{
+    grid-template-columns:230px 1fr;
+  }
+
+  .result-card{
+    grid-column:1/-1;
+  }
+
+  .pipeline{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .step:nth-child(3){
+    border-right:0;
+  }
+
+  .step:nth-child(-n+3)::after{
+    display:none;
+  }
+
+  .arch{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .arch-item:nth-child(3){
+    border-right:0;
+  }
+
+  .metrics-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .impact-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:760px){
+
+  .container{
+    width:min(100% - 26px,1240px);
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    padding-top:48px;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-risk{
+    grid-template-columns:1fr 125px;
+  }
+
+  .gauge{
+    width:120px;
+    height:120px;
+  }
+
+  .trust-strip{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .trust:nth-child(2){
+    border-right:0;
+  }
+
+  .trust:nth-child(-n+2){
+    border-bottom:1px solid var(--line);
+  }
+
+  .console{
+    grid-template-columns:1fr;
+  }
+
+  .tx-main{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .pipeline,
+  .arch{
+    grid-template-columns:1fr;
+  }
+
+  .step,
+  .arch-item{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .step:last-child,
+  .arch-item:last-child{
+    border-bottom:0;
+  }
+
+  .step::after{
+    display:none;
+  }
+
+  .explain-grid,
+  .evaluation-grid,
+  .transparency-grid{
+    grid-template-columns:1fr;
+  }
+
+  .metrics-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .impact-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .cost-box{
+    grid-template-columns:1fr;
+  }
+
+  .cost-item{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+  }
+
+  .cost-item:last-child{
+    border-bottom:0;
+    padding-bottom:0;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .footer-right{
+    text-align:left;
+  }
+
+  .section{
+    padding-top:58px;
+  }
+}
+
+@media(max-width:480px){
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero-actions .btn{
+    width:100%;
+  }
+
+  .trust-strip{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    border-right:0!important;
+    border-bottom:1px solid var(--line);
+  }
+
+  .trust:last-child{
+    border-bottom:0;
+  }
+
+  .metrics-grid{
+    grid-template-columns:1fr;
+  }
+
+  .impact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .tx-main{
+    grid-template-columns:1fr;
+  }
+
+  .hero-risk{
+    grid-template-columns:1fr;
+  }
+
+  .gauge{
+    margin:0 auto;
+  }
+
+  .shap-row{
+    grid-template-columns:42px 1fr 64px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+
+    <a class="brand" href="#top" aria-label="VEYRiON home">
+
+      <div class="brand-mark">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 3 19 6v5c0 4.8-2.8 8-7 10-4.2-2-7-5.2-7-10V6l7-3Z"/>
+          <path d="m9 12 2 2 4-5"/>
+        </svg>
+      </div>
+
+      <div>
+        <div class="brand-name">VEYRiON</div>
+        <div class="brand-sub">TRANSACTION RISK INTELLIGENCE</div>
+      </div>
+
+    </a>
+
+    <div class="nav-links">
+      <a href="#verify">Verify</a>
+      <a href="#explain">Explainability</a>
+      <a href="#performance">Performance</a>
+      <a href="#how">How it works</a>
+    </div>
+
+    <div class="nav-status" id="apiStatus">
+      <span class="status-dot"></span>
+      <span id="apiStatusText">Checking engine</span>
+    </div>
+
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="container hero-grid">
+
+    <div>
+
+      <div class="eyebrow">
+        Defense-only AI risk decision support
+      </div>
+
+      <h1>
+        Detect risk.<br>
+        <em>Explain decisions.</em><br>
+        Protect merchant value.
+      </h1>
+
+      <p>
+        VEYRiON evaluates transaction risk with a trained XGBoost
+        fraud model, explains the strongest model signals, and
+        converts the score into a cost-sensitive merchant recommendation.
+      </p>
+
+      <div class="hero-actions">
+
+        <a class="btn btn-primary" href="#verify">
+          Verify a transaction
+        </a>
+
+        <a class="btn" href="#performance">
+          View model evidence
+        </a>
+
+      </div>
+
+      <div class="hero-note">
+
+        <span>
+          <i></i>
+          No login required
+        </span>
+
+        <span>
+          <i></i>
+          No real payment processed
+        </span>
+
+        <span>
+          <i></i>
+          Defense-only prototype
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="hero-card">
+
+      <div class="card-top">
+        <span class="tiny-label">
+          Live risk snapshot
+        </span>
+
+        <span class="live-pill">
+          Demo engine
+        </span>
+      </div>
+
+      <div class="hero-risk">
+
+        <div>
+
+          <div class="tx-id">
+            Transaction
+          </div>
+
+          <div class="tx-title">
+            Suspicious transaction
+          </div>
+
+          <div class="tx-amount" id="heroAmount">
+            ₹76.94
+          </div>
+
+          <div class="tx-meta">
+            Public benchmark · demonstration mode
+          </div>
+
+        </div>
+
+        <div class="gauge">
+
+          <div class="gauge-content">
+
+            <div class="gauge-number" id="heroProb">
+              90.07%
+            </div>
+
+            <div class="gauge-label">
+              fraud probability
+            </div>
+
+            <div class="gauge-risk">
+              HIGH RISK
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="hero-decision">
+
+        <span>
+          Recommended merchant action
+        </span>
+
+        <strong id="heroAction">
+          BLOCK
+        </strong>
+
+      </div>
+
+      <div class="hero-foot">
+        Risk policy:
+        &lt;1% Approve ·
+        1%–&lt;19% Review ·
+        ≥19% Block
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container trust-strip">
+
+    <div class="trust">
+      <strong>56,746</strong>
+      <span>Held-out transactions</span>
+    </div>
+
+    <div class="trust">
+      <strong>83.16%</strong>
+      <span>Fraud recall</span>
+    </div>
+
+    <div class="trust">
+      <strong>97.75%</strong>
+      <span>ROC-AUC</span>
+    </div>
+
+    <div class="trust">
+      <strong>3</strong>
+      <span>Risk routing actions</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- VERIFY -->
+
+<section class="section" id="verify">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+        <div class="section-kicker">
+          Live risk console
+        </div>
+
+        <h2>
+          Verify a transaction
+        </h2>
+      </div>
+
+      <p>
+        No manual V1–V28 entry. Pick a prepared benchmark
+        transaction and let the model perform the complete
+        risk assessment.
+      </p>
+
+    </div>
+
+    <div class="console">
+
+      <!-- SCENARIOS -->
+
+      <div class="card pad">
+
+        <div class="card-title">
+          Choose a scenario
+        </div>
+
+        <div class="card-sub">
+          Each scenario loads a real model-compatible
+          transaction from the demo API.
+        </div>
+
+        <button
+          class="scenario active"
+          id="scenarioFraud"
+          onclick="loadDemo('fraud')"
+        >
+
+          <div class="scenario-title">
+            <span class="dot red"></span>
+            Suspicious transaction
+          </div>
+
+          <div class="scenario-desc">
+            High-risk fraud example
+          </div>
+
+        </button>
+
+        <button
+          class="scenario"
+          id="scenarioMedium"
+          onclick="loadDemo('medium')"
+        >
+
+          <div class="scenario-title">
+            <span class="dot yellow"></span>
+            Transaction for review
+          </div>
+
+          <div class="scenario-desc">
+            Borderline-risk example
+          </div>
+
+        </button>
+
+        <button
+          class="scenario"
+          id="scenarioLegit"
+          onclick="loadDemo('legitimate')"
+        >
+
+          <div class="scenario-title">
+            <span class="dot green"></span>
+            Legitimate transaction
+          </div>
+
+          <div class="scenario-desc">
+            Low-risk example
+          </div>
+
+        </button>
+
+        <div class="small-note">
+          <strong>Judge-friendly demo:</strong>
+          no account, no signup, and no raw model fields
+          are required. The technical benchmark data stays
+          behind the product experience.
+        </div>
+
+      </div>
+
+      <!-- TRANSACTION -->
+
+      <div class="card pad transaction-card">
+
+        <div class="tx-header">
+
+          <div>
+
+            <div class="card-title">
+              Transaction review
+            </div>
+
+            <div
+              class="card-sub"
+              id="transactionStatus"
+            >
+              Transaction loaded · ready to analyze.
+            </div>
+
+          </div>
+
+          <div class="demo-tag">
+            DEMO MODE
+          </div>
+
+        </div>
+
+        <div class="tx-main">
+
+          <div class="info-box">
+
+            <div class="info-label">
+              Transaction ID
+            </div>
+
+            <div
+              class="info-value"
+              id="txId"
+            >
+              TX-DEMO-001
+            </div>
+
+            <div class="info-help">
+              Benchmark row reference
+            </div>
+
+          </div>
+
+          <div class="info-box">
+
+            <div class="info-label">
+              Amount
+            </div>
+
+            <div
+              class="info-value"
+              id="txAmount"
+            >
+              ₹76.94
+            </div>
+
+            <div class="info-help">
+              Transaction amount
+            </div>
+
+          </div>
+
+          <div class="info-box">
+
+            <div class="info-label">
+              Transaction time
+            </div>
+
+            <div
+              class="info-value"
+              id="txTime"
+            >
+              20:35
+            </div>
+
+            <div class="info-help">
+              Converted from benchmark time
+            </div>
+
+          </div>
+
+          <div class="info-box">
+
+            <div class="info-label">
+              Risk engine
+            </div>
+
+            <div class="info-value">
+              XGBoost
+            </div>
+
+            <div class="info-help">
+              Trained fraud classifier
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="transaction-actions">
+
+          <button
+            class="btn"
+            onclick="resetResult()"
+          >
+            Reset
+          </button>
+
+          <button
+            class="btn btn-primary"
+            id="analyzeBtn"
+            onclick="analyzeTransaction()"
+          >
+            Analyze transaction
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- RESULT -->
+
+      <div
+        class="card pad result-card"
+        id="resultCard"
+      >
+
+        <div class="result-top">
+
+          <span class="result-status">
+            AI RISK ASSESSMENT
+          </span>
+
+          <span
+            class="risk-badge high"
+            id="riskBadge"
+          >
+            READY
+          </span>
+
+        </div>
+
+        <div
+          class="probability"
+          id="probability"
+        >
+          —
+        </div>
+
+        <div class="probability-label">
+          Predicted fraud probability
+        </div>
+
+        <div class="result-bar">
+
+          <div
+            class="result-bar-fill"
+            id="resultBar"
+          ></div>
+
+        </div>
+
+        <div class="decision-box">
+
+          <div class="decision-label">
+            Recommended merchant action
+          </div>
+
+          <div
+            class="decision-value"
+            id="decision"
+          >
+            READY TO ANALYZE
+          </div>
+
+          <div
+            class="decision-copy"
+            id="decisionCopy"
+          >
+            Run the selected transaction through
+            the fraud-risk engine.
+          </div>
+
+        </div>
+
+        <div
+          class="result-footer"
+          id="resultFooter"
+        >
+          Model decision pending analysis.
+        </div>
+
+        <div
+          class="error-box"
+          id="errorBox"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <!-- POLICY -->
+
+    <div class="policy">
+
+      <div class="policy-head">
+
+        <div>
+          <h3>
+            Cost-sensitive risk policy
+          </h3>
+        </div>
+
+        <p>
+          Thresholds are selected using validation data
+          and locked before final held-out evaluation.
+          They are prototype policy thresholds, not
+          universal fraud rules.
+        </p>
+
+      </div>
+
+      <div class="policy-track">
+
+        <div class="policy-segment low">
+          <strong>APPROVE</strong>
+          <span>&lt; 1%</span>
+        </div>
+
+        <div class="policy-segment med">
+          <strong>REVIEW</strong>
+          <span>1% – &lt; 19%</span>
+        </div>
+
+        <div class="policy-segment high">
+          <strong>BLOCK</strong>
+          <span>≥ 19%</span>
+        </div>
+
+      </div>
+
+      <div class="policy-note">
+        Business intent: minimize expected merchant loss
+        while avoiding unnecessary friction for legitimate
+        transactions.
+      </div>
+
+    </div>
+
+    <!-- CSV -->
+
+    <details class="advanced">
+
+      <summary>
+        Advanced testing · upload a benchmark CSV
+      </summary>
+
+      <div class="advanced-body">
+
+        <div class="upload-row">
+
+          <input
+            class="file-input"
+            id="csvFile"
+            type="file"
+            accept=".csv,text/csv"
+          >
+
+          <button
+            class="btn"
+            id="csvLoadBtn"
+            onclick="loadCSV()"
+          >
+            Load CSV
+          </button>
+
+        </div>
+
+        <div
+          class="csv-status"
+          id="csvStatus"
+        >
+          Optional developer/testing workflow.
+          Required columns: Time, V1–V28, Amount.
+          Large files are streamed to avoid freezing Chrome.
+        </div>
+
+        <div class="csv-progress">
+
+          <div
+            class="csv-progress-fill"
+            id="csvProgress"
+          ></div>
+
+        </div>
+
+        <select
+          class="csv-select"
+          id="csvSelect"
+          disabled
+        >
+          <option>
+            Select from the first 100 rows
+          </option>
+        </select>
+
+        <div class="csv-row-tools">
+
+          <input
+            class="csv-row-input"
+            id="csvRowNumber"
+            type="number"
+            min="1"
+            placeholder="CSV row number"
+          >
+
+          <button
+            class="btn"
+            id="csvRowBtn"
+            onclick="loadCSVRow()"
+            disabled
+          >
+            Load this row
+          </button>
+
+        </div>
+
+        <div
+          class="technical-note"
+          style="margin-top:8px"
+        >
+          Large benchmark files are not rendered as
+          hundreds of thousands of dropdown options.
+          Enter any row number to load that transaction
+          into the normal verification console.
+        </div>
+
+      </div>
+
+    </details>
+
+  </div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+        <div class="section-kicker">
+          Decision pipeline
+        </div>
+
+        <h2>
+          From transaction to action
+        </h2>
+      </div>
+
+      <p>
+        The product separates model inference,
+        explainability, and business routing so the judge
+        can see exactly what the system does.
+      </p>
+
+    </div>
+
+    <div class="pipeline">
+
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">↳</div>
+        <h3>Transaction</h3>
+        <p>
+          A transaction profile enters the risk workflow.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">◈</div>
+        <h3>Feature processing</h3>
+        <p>
+          The record is aligned to the trained model's
+          expected feature order.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">AI</div>
+        <h3>XGBoost</h3>
+        <p>
+          The classifier estimates the probability of fraud.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-icon">✦</div>
+        <h3>SHAP</h3>
+        <p>
+          Model contributions explain which signals
+          moved the decision.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-icon">✓</div>
+        <h3>Risk policy</h3>
+        <p>
+          The score becomes Approve, Review, or Block.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- EXPLAINABILITY -->
+
+<section class="section" id="explain">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+        <div class="section-kicker">
+          Explainable AI
+        </div>
+
+        <h2>
+          Why did the model decide this?
+        </h2>
+      </div>
+
+      <p>
+        SHAP provides local evidence for the selected
+        transaction. Positive values push risk higher;
+        negative values push risk lower.
+      </p>
+
+    </div>
+
+    <div class="explain-grid">
+
+      <div class="card shap-card">
+
+        <div class="card-title">
+          Top model signals
+        </div>
+
+        <div
+          class="card-sub"
+          id="shapSubtitle"
+        >
+          Analyze a transaction to populate the explanation.
+        </div>
+
+        <div
+          class="shap-list"
+          id="shapList"
+        >
+
+          <div class="technical-note">
+            No analysis yet. Choose a scenario above
+            and click <strong>Analyze transaction</strong>.
+          </div>
+
+        </div>
+
+        <div class="legend">
+
+          <span>
+            <i class="up"></i>
+            Increased risk
+          </span>
+
+          <span>
+            <i class="down"></i>
+            Reduced risk
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="card transparency-card">
+
+        <div class="card-title">
+          Evidence, not invented meaning
+        </div>
+
+        <div class="card-sub">
+          The explanation is deliberately limited to
+          what the benchmark supports.
+        </div>
+
+        <div
+          class="technical-note"
+          style="margin-top:18px"
+        >
+
+          <strong>
+            V1–V28 are anonymized/transformed model features.
+          </strong>
+
+          <br><br>
+
+          VEYRiON does not claim that V14 means
+          "merchant risk", V10 means "device risk",
+          or any other unsupported business interpretation.
+
+          SHAP only tells us how strongly each model
+          feature contributed to this prediction.
+
+        </div>
+
+        <div class="technical-note">
+
+          <strong>
+            Production path:
+          </strong>
+
+          <br>
+
+          Indian payment deployment would require richer
+          payment, merchant, customer, device, velocity,
+          and location context.
+
+          This prototype does not pretend to have those fields.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PERFORMANCE -->
+
+<section class="section" id="performance">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="section-kicker">
+          Model evidence
+        </div>
+
+        <h2>
+          Performance on held-out data
+        </h2>
+
+      </div>
+
+      <p>
+        These results are presented as model evidence,
+        not marketing claims. Accuracy is not used as
+        the headline metric because fraud is highly imbalanced.
+      </p>
+
+    </div>
+
+    <div class="metrics-grid">
+
+      <div class="metric">
+        <div class="metric-value">55.63%</div>
+        <div class="metric-label">Precision</div>
+        <div class="metric-note">
+          Fraud alerts that were actually fraud
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-value">83.16%</div>
+        <div class="metric-label">Recall</div>
+        <div class="metric-note">
+          Fraud cases successfully captured
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-value">66.67%</div>
+        <div class="metric-label">F1 score</div>
+        <div class="metric-note">
+          Precision/recall balance
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-value">82.92%</div>
+        <div class="metric-label">PR-AUC</div>
+        <div class="metric-note">
+          Useful for imbalanced fraud detection
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-value">97.75%</div>
+        <div class="metric-label">ROC-AUC</div>
+        <div class="metric-note">
+          Ranking discrimination
+        </div>
+      </div>
+
+    </div>
+
+    <div class="evaluation-grid">
+
+      <div class="card eval-card">
+
+        <h3>
+          Confusion matrix
+        </h3>
+
+        <p>
+          Final held-out evaluation: 56,746 transactions.
+        </p>
+
+        <div class="matrix">
+
+          <div></div>
+
+          <div class="head">
+            Actual Legit
+          </div>
+
+          <div class="head">
+            Actual Fraud
+          </div>
+
+          <div class="axis">
+            Predicted Legit
+          </div>
+
+          <div class="cell">
+            <strong>56,588</strong>
+            <span>True negative</span>
+          </div>
+
+          <div class="cell fn">
+            <strong>16</strong>
+            <span>False negative</span>
+          </div>
+
+          <div class="axis">
+            Predicted Fraud
+          </div>
+
+          <div class="cell fp">
+            <strong>63</strong>
+            <span>False positive</span>
+          </div>
+
+          <div class="cell tp">
+            <strong>79</strong>
+            <span>True positive</span>
+          </div>
+
+        </div>
+
+        <div class="evaluation-note">
+          The system captures 79 fraud cases while
+          16 fraud cases remain missed. The 63 false
+          positives represent legitimate transactions
+          that the classifier flagged.
+        </div>
+
+      </div>
+
+      <div class="card eval-card">
+
+        <h3>
+          Why false-positive cost matters
+        </h3>
+
+        <p>
+          A useful risk manager must consider both sides
+          of the error.
+        </p>
+
+        <div
+          class="impact-grid"
+          style="margin-top:16px"
+        >
+
+          <div class="impact">
+            <div class="num">79</div>
+            <div class="label">Fraud captured</div>
+            <div class="desc">
+              Detected fraud cases in the final test set.
+            </div>
+          </div>
+
+          <div class="impact">
+            <div class="num">16</div>
+            <div class="label">Fraud missed</div>
+            <div class="desc">
+              False negatives that can represent merchant loss.
+            </div>
+          </div>
+
+          <div class="impact">
+            <div class="num">63</div>
+            <div class="label">Legitimate flagged</div>
+            <div class="desc">
+              False positives that can create customer friction.
+            </div>
+          </div>
+
+          <div class="impact">
+            <div class="num">56,588</div>
+            <div class="label">Legitimate cleared</div>
+            <div class="desc">
+              True negatives correctly identified.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="cost-box">
+
+      <div class="cost-item">
+        <span>
+          False-negative cost assumption
+        </span>
+        <strong>10×</strong>
+        <p>
+          Missing fraud is weighted more heavily
+          than unnecessary friction.
+        </p>
+      </div>
+
+      <div class="cost-item">
+        <span>
+          False-positive cost assumption
+        </span>
+        <strong>1×</strong>
+        <p>
+          A legitimate transaction incorrectly flagged
+          carries lower relative cost.
+        </p>
+      </div>
+
+      <div class="cost-item">
+        <span>
+          Policy objective
+        </span>
+        <strong>Minimize loss</strong>
+        <p>
+          Thresholds are selected as a decision policy,
+          not as a generic 0.50 cutoff.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- BUSINESS IMPACT -->
+
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="section-kicker">
+          Business impact
+        </div>
+
+        <h2>
+          Built around the merchant's decision
+        </h2>
+
+      </div>
+
+      <p>
+        The ML model is only useful when its output
+        becomes an operationally understandable action.
+      </p>
+
+    </div>
+
+    <div class="impact-grid">
+
+      <div class="impact">
+        <div class="num">✓</div>
+        <div class="label">Approve</div>
+        <div class="desc">
+          Low predicted fraud risk. Keep friction low
+          for routine transactions.
+        </div>
+      </div>
+
+      <div class="impact">
+        <div class="num">⚠</div>
+        <div class="label">Review</div>
+        <div class="desc">
+          Uncertain risk. Route for additional
+          verification rather than blindly blocking.
+        </div>
+      </div>
+
+      <div class="impact">
+        <div class="num">✕</div>
+        <div class="label">Block</div>
+        <div class="desc">
+          High predicted risk. Recommend holding
+          the transaction for fraud controls.
+        </div>
+      </div>
+
+      <div class="impact">
+        <div class="num">✦</div>
+        <div class="label">Explain</div>
+        <div class="desc">
+          Show local SHAP evidence so the decision
+          is auditable.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ARCHITECTURE -->
+
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="section-kicker">
+          Engineering
+        </div>
+
+        <h2>
+          End-to-end architecture
+        </h2>
+
+      </div>
+
+      <p>
+        A small but complete ML application:
+        model inference, API serving, explainability,
+        policy routing, and a user-facing console.
+      </p>
+
+    </div>
+
+    <div class="arch">
+
+      <div class="arch-item">
+        <div class="arch-icon">⌁</div>
+        <strong>Web console</strong>
+        <span>HTML · CSS · JavaScript</span>
+      </div>
+
+      <div class="arch-item">
+        <div class="arch-icon">API</div>
+        <strong>Flask API</strong>
+        <span>REST prediction service</span>
+      </div>
+
+      <div class="arch-item">
+        <div class="arch-icon">AI</div>
+        <strong>XGBoost</strong>
+        <span>Fraud probability</span>
+      </div>
+
+      <div class="arch-item">
+        <div class="arch-icon">✦</div>
+        <strong>SHAP</strong>
+        <span>Local explanation</span>
+      </div>
+
+      <div class="arch-item">
+        <div class="arch-icon">✓</div>
+        <strong>Risk policy</strong>
+        <span>Approve · Review · Block</span>
+      </div>
+
+    </div>
+
+    <div class="stack">
+
+      <span class="tag">Python</span>
+      <span class="tag">Flask</span>
+      <span class="tag">XGBoost</span>
+      <span class="tag">SHAP</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">NumPy</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">REST API</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- TRANSPARENCY -->
+
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="section-kicker">
+          Transparency
+        </div>
+
+        <h2>
+          Know exactly what this prototype proves
+        </h2>
+
+      </div>
+
+      <p>
+        Strong projects are explicit about their
+        evidence and their limits.
+      </p>
+
+    </div>
+
+    <div class="transparency-grid">
+
+      <div class="card pad">
+
+        <div class="card-title">
+          Benchmark & evaluation
+        </div>
+
+        <div class="info-list">
+
+          <div class="info-line">
+            <span>Dataset</span>
+            <strong>
+              Public anonymized credit-card fraud benchmark
+            </strong>
+          </div>
+
+          <div class="info-line">
+            <span>Model inputs</span>
+            <strong>
+              Time + V1–V28 + Amount
+            </strong>
+          </div>
+
+          <div class="info-line">
+            <span>Target</span>
+            <strong>
+              Fraud / legitimate
+            </strong>
+          </div>
+
+          <div class="info-line">
+            <span>Evaluation</span>
+            <strong>
+              Held-out final test set
+            </strong>
+          </div>
+
+          <div class="info-line">
+            <span>Decision layer</span>
+            <strong>
+              Cost-sensitive threshold policy
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card pad">
+
+        <div class="card-title">
+          Production boundary
+        </div>
+
+        <div class="warning">
+
+          <strong>Important:</strong>
+
+          the benchmark does not contain the complete
+          Indian merchant/payment context needed for
+          a production fraud platform.
+
+          This website therefore presents an evaluated
+          fraud-risk prototype, not a live Razorpay
+          integration or a claim about real customer transactions.
+
+        </div>
+
+        <div class="info-list">
+
+          <div class="info-line">
+            <span>Indian production signals</span>
+            <strong>
+              Would require payment, merchant, customer,
+              device, velocity and location context
+            </strong>
+          </div>
+
+          <div class="info-line">
+            <span>Real payment processing</span>
+            <strong>
+              Not connected
+            </strong>
+          </div>
+
+          <div class="info-line">
+            <span>Primary use</span>
+            <strong>
+              Defense-only risk decision support
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <div class="footer-brand">
+          VEYRiON
+        </div>
+
+        <p>
+          AI Transaction Risk Intelligence.
+          An end-to-end defense-only prototype for
+          fraud-risk scoring, explainability, and
+          cost-sensitive merchant decision support.
+        </p>
+
+      </div>
+
+      <div class="footer-right">
+
+        <a href="#verify">Verify</a>
+        <a href="#explain">Explainability</a>
+        <a href="#performance">Evidence</a>
+        <a href="#how">Architecture</a>
+
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VEYRiON · Prototype
+      </span>
+
+      <span>
+        No login · No real payment · Defense-only
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+<script>
+
+/* =========================================================
+   IMPORTANT API FIX
+   ========================================================= */
+
+/*
+   Do NOT use:
+
+   const API_BASE = 'http://127.0.0.1:5000';
+
+   Instead use the same origin as the website.
+
+   This works locally:
+   http://127.0.0.1:5000
+
+   And later when deployed:
+   https://your-domain.com
+*/
+
+const API_BASE = window.location.origin;
+
+
+/* =========================================================
+   MODEL FEATURES
+   ========================================================= */
+
+const FEATURES = [
+  'Time',
+  ...Array.from(
+    {length:28},
+    (_,i) => `V${i+1}`
+  ),
+  'Amount'
+];
+
+let currentTransaction = null;
+let currentScenario = 'fraud';
+let csvRows = [];
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+const $ = id => document.getElementById(id);
+
+
+function showToast(text){
+
+  const t = $('toast');
+
+  t.textContent = text;
+
+  t.classList.add('show');
+
+  clearTimeout(window.__toast);
+
+  window.__toast = setTimeout(
+    () => t.classList.remove('show'),
+    2800
+  );
+}
+
+
+function setApi(online){
+
+  $('apiStatus').classList.toggle(
+    'offline',
+    !online
+  );
+
+  $('apiStatusText').textContent =
+    online
+      ? 'AI engine online'
+      : 'Engine offline';
+}
+
+
+function money(v){
+
+  const n = Number(v);
+
+  return Number.isFinite(n)
+    ? `₹${n.toLocaleString(
+        'en-IN',
+        {
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        }
+      )}`
+    : '₹—';
+}
+
+
+function timeFromSeconds(v){
+
+  const n = Number(v);
+
+  if(!Number.isFinite(n)){
+    return '—';
+  }
+
+  const mins =
+    ((n / 60) % 1440 + 1440) % 1440;
+
+  const h = Math.floor(mins / 60);
+
+  const m = Math.floor(mins % 60);
+
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+
+function escapeHtml(s){
+
+  return String(s).replace(
+    /[&<>'"]/g,
+    c => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      "'":'&#39;',
+      '"':'&quot;'
+    }[c])
+  );
+}
+
+
+/* =========================================================
+   SCENARIO
+   ========================================================= */
+
+function scenarioActive(type){
+
+  const ids = {
+    fraud:'scenarioFraud',
+    medium:'scenarioMedium',
+    legitimate:'scenarioLegit'
+  };
+
+  [
+    'fraud',
+    'medium',
+    'legitimate'
+  ].forEach(x => {
+
+    const el = $(ids[x]);
+
+    if(el){
+      el.classList.toggle(
+        'active',
+        x === type
+      );
+    }
+
+  });
+
+  currentScenario = type;
+}
+
+
+/* =========================================================
+   API HEALTH CHECK
+   ========================================================= */
+
+/*
+   THIS IS THE IMPORTANT FIX.
+
+   Your backend health endpoint is:
+
+   /api/health
+
+   NOT:
+
+   /
+*/
+
+async function checkAPI(){
+
+  try{
+
+    const response = await fetch(
+      `${API_BASE}/api/health`,
+      {
+        method:'GET',
+        cache:'no-store',
+        headers:{
+          'Accept':'application/json'
+        }
+      }
+    );
+
+    if(!response.ok){
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+    const data = await response.json();
+
+    if(data.status !== 'online'){
+
+      throw new Error(
+        'API is not online'
+      );
+
+    }
+
+    setApi(true);
+
+    console.log(
+      'VEYRiON API online:',
+      data
+    );
+
+  }catch(error){
+
+    console.error(
+      'VEYRiON API connection failed:',
+      error
+    );
+
+    setApi(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD DEMO TRANSACTION
+   ========================================================= */
+
+async function loadDemo(
+  type,
+  notify=true
+){
+
+  currentTransaction = null;
+
+  scenarioActive(type);
+
+  $('analyzeBtn').disabled = true;
+
+  $('transactionStatus').innerHTML =
+    '<span class="loading">' +
+    '<span class="spinner"></span>' +
+    ' Loading transaction...' +
+    '</span>';
+
+  resetResult(false);
+
+
+  try{
+
+    const response = await fetch(
+      `${API_BASE}/demo/${type}`,
+      {
+        method:'GET',
+        cache:'no-store',
+        headers:{
+          'Accept':'application/json'
+        }
+      }
+    );
+
+
+    const raw = await response.text();
+
+    let data = {};
+
+    try{
+
+      data = raw
+        ? JSON.parse(raw)
+        : {};
+
+    }catch{
+
+      throw new Error(
+        `Demo API returned non-JSON response (HTTP ${response.status}).`
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        data.details ||
+        `Demo API returned HTTP ${response.status}`
+      );
+
+    }
+
+
+    currentTransaction = data;
+
+
+    const id =
+      type === 'fraud'
+        ? 'TX-DEMO-001'
+        : type === 'medium'
+          ? 'TX-DEMO-002'
+          : 'TX-DEMO-003';
+
+
+    $('txId').textContent = id;
+
+    $('txAmount').textContent =
+      money(data.Amount);
+
+    $('txTime').textContent =
+      timeFromSeconds(data.Time);
+
+
+    $('heroAmount').textContent =
+      money(data.Amount);
+
+
+    $('heroProb').textContent =
+      type === 'fraud'
+        ? '90.07%'
+        : type === 'medium'
+          ? '9.91%'
+          : '0.00%';
+
+
+    $('heroAction').textContent =
+      type === 'fraud'
+        ? 'BLOCK'
+        : type === 'medium'
+          ? 'REVIEW'
+          : 'APPROVE';
+
+
+    $('transactionStatus').innerHTML =
+      '<span class="loaded-dot"></span>' +
+      ' Transaction loaded · ready to analyze.';
+
+
+    $('resultFooter').textContent =
+      'Transaction loaded. Click Analyze transaction to run the model.';
+
+
+    $('analyzeBtn').disabled = false;
+
+
+    if(notify){
+
+      showToast(
+        'Transaction loaded. Ready to analyze.'
+      );
+
+    }
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      'VEYRiON demo transaction error:',
+      error
+    );
+
+
+    currentTransaction = null;
+
+    $('analyzeBtn').disabled = true;
+
+
+    $('transactionStatus').textContent =
+      'Could not load demo transaction.';
+
+
+    $('resultFooter').textContent =
+      'Demo transaction could not be loaded.';
+
+
+    $('errorBox').innerHTML =
+      `<strong>Demo transaction failed</strong><br>` +
+      `${escapeHtml(error.message || 'Unknown error')}<br><br>` +
+      `<small>Endpoint: ${escapeHtml(API_BASE)}/demo/${escapeHtml(type)}</small>`;
+
+
+    $('errorBox').style.display = 'block';
+
+
+    if(notify){
+
+      showToast(
+        'Could not load demo transaction.'
+      );
+
+    }
+
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   RESET RESULT
+   ========================================================= */
+
+function resetResult(
+  clearMessage=true
+){
+
+  $('resultCard').className =
+    'card pad result-card';
+
+  $('riskBadge').className =
+    'risk-badge high';
+
+  $('riskBadge').textContent =
+    'READY';
+
+  $('probability').textContent =
+    '—';
+
+  $('resultBar').style.width =
+    '0%';
+
+  $('decision').textContent =
+    'READY TO ANALYZE';
+
+  $('decisionCopy').textContent =
+    'Run the selected transaction through the fraud-risk engine.';
+
+  $('resultFooter').textContent =
+    currentTransaction
+      ? 'Transaction loaded. Click Analyze transaction to run the model.'
+      : 'Select a transaction scenario to begin.';
+
+  $('errorBox').style.display =
+    'none';
+
+  $('shapList').innerHTML =
+    '<div class="technical-note">' +
+    'No analysis yet. The selected transaction is ready for the model.' +
+    '</div>';
+
+  $('shapSubtitle').textContent =
+    'Run the analysis to see the strongest model signals.';
+
+  if(clearMessage){
+
+    showToast(
+      currentTransaction
+        ? 'Analysis reset. Transaction is still loaded.'
+        : 'Select a transaction first.'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   NORMALIZE API RESULT
+   ========================================================= */
+
+function normalizeResult(data){
+
+  const p = Number(
+    data.fraud_probability ??
+    data.probability ??
+    data.score ??
+    0
+  );
+
+
+  let action =
+    String(
+      data.action ??
+      data.decision ??
+      ''
+    ).toUpperCase();
+
+
+  let risk =
+    String(
+      data.risk_level ??
+      ''
+    ).toUpperCase();
+
+
+  if(!risk){
+
+    risk =
+      p >= .19
+        ? 'HIGH'
+        : p >= .01
+          ? 'MEDIUM'
+          : 'LOW';
+
+  }
+
+
+  if(!action){
+
+    action =
+      p >= .19
+        ? 'BLOCK'
+        : p >= .01
+          ? 'REVIEW'
+          : 'APPROVE';
+
+  }
+
+
+  return {
+
+    p:Math.max(
+      0,
+      Math.min(1,p)
+    ),
+
+    action,
+
+    risk,
+
+    shap:
+      Array.isArray(
+        data.top_shap_features
+      )
+        ? data.top_shap_features
+        : []
+
+  };
+
+}
+
+
+/* =========================================================
+   ANALYZE TRANSACTION
+   ========================================================= */
+
+async function analyzeTransaction(){
+
+  if(!currentTransaction){
+
+    const loaded =
+      await loadDemo(
+        currentScenario,
+        true
+      );
+
+    if(!loaded){
+      return;
+    }
+
+  }
+
+
+  const btn =
+    $('analyzeBtn');
+
+  const originalText =
+    'Analyze transaction';
+
+
+  btn.disabled = true;
+
+  btn.innerHTML =
+    '<span class="loading">' +
+    '<span class="spinner"></span>' +
+    ' Analyzing...' +
+    '</span>';
+
+
+  $('errorBox').style.display =
+    'none';
+
+
+  $('transactionStatus').innerHTML =
+    '<span class="loading">' +
+    '<span class="spinner"></span>' +
+    ' Sending transaction to AI risk engine...' +
+    '</span>';
+
+
+  try{
+
+    const payload = {};
+
+
+    for(const feature of FEATURES){
+
+      const value =
+        Number(
+          currentTransaction[feature]
+        );
+
+
+      if(!Number.isFinite(value)){
+
+        throw new Error(
+          `Invalid or missing model field: ${feature}`
+        );
+
+      }
+
+
+      payload[feature] = value;
+
+    }
+
+
+    console.log(
+      'VEYRiON /predict request:',
+      payload
+    );
+
+
+    const controller =
+      new AbortController();
+
+
+    const timeout =
+      setTimeout(
+        () => controller.abort(),
+        15000
+      );
+
+
+    let response;
+
+
+    try{
+
+      response = await fetch(
+        `${API_BASE}/predict`,
+        {
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+            'Accept':'application/json'
+          },
+          body:JSON.stringify(payload),
+          signal:controller.signal
+        }
+      );
+
+    }finally{
+
+      clearTimeout(timeout);
+
+    }
+
+
+    const raw =
+      await response.text();
+
+
+    let data = {};
+
+
+    try{
+
+      data =
+        raw
+          ? JSON.parse(raw)
+          : {};
+
+    }catch{
+
+      throw new Error(
+        `API returned non-JSON response (HTTP ${response.status}).`
+      );
+
+    }
+
+
+    console.log(
+      'VEYRiON /predict response:',
+      response.status,
+      data
+    );
+
+
+    if(!response.ok){
+
+      throw new Error(
+
+        data.error
+
+          ? `${data.error}${
+              data.details
+                ? ` — ${data.details}`
+                : ''
+            }`
+
+          : `Prediction API returned HTTP ${response.status}.`
+
+      );
+
+    }
+
+
+    renderResult(
+      normalizeResult(data)
+    );
+
+
+    $('transactionStatus').innerHTML =
+      '<span class="loaded-dot"></span>' +
+      ' AI assessment completed.';
+
+
+    showToast(
+      'Risk assessment complete.'
+    );
+
+
+  }catch(error){
+
+    console.error(
+      'VEYRiON prediction error:',
+      error
+    );
+
+
+    let message =
+      error.message ||
+      'Prediction failed.';
+
+
+    if(error.name === 'AbortError'){
+
+      message =
+        'The AI engine did not respond within 15 seconds. Make sure Flask is running.';
+
+    }else if(error instanceof TypeError){
+
+      message =
+        'Could not connect to the Flask API. Check that the backend is running.';
+
+    }
+
+
+    $('errorBox').innerHTML =
+      `<strong>Prediction failed</strong><br>` +
+      `${escapeHtml(message)}<br><br>` +
+      `<small>API: ${escapeHtml(API_BASE)}/predict</small>`;
+
+
+    $('errorBox').style.display =
+      'block';
+
+
+    $('transactionStatus').textContent =
+      'Transaction loaded, but the AI assessment could not be completed.';
+
+
+    $('resultFooter').textContent =
+      'Check the API connection and try again.';
+
+
+    showToast(
+      'Prediction failed. See the error message.'
+    );
+
+
+  }finally{
+
+    btn.disabled = false;
+
+    btn.textContent =
+      originalText;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER RESULT
+   ========================================================= */
+
+function renderResult(r){
+
+  const pct =
+    (r.p * 100).toFixed(2);
+
+
+  const cls =
+    r.risk === 'HIGH'
+      ? 'high'
+      : r.risk === 'MEDIUM'
+        ? 'medium'
+        : 'low';
+
+
+  $('resultCard').className =
+    `card pad result-card ${cls}`;
+
+
+  $('riskBadge').className =
+    `risk-badge ${cls}`;
+
+
+  $('riskBadge').textContent =
+    `${r.risk} RISK`;
+
+
+  $('probability').textContent =
+    `${pct}%`;
+
+
+  $('resultBar').style.width =
+    `${pct}%`;
+
+
+  $('decision').textContent =
+    r.action;
+
+
+  const copy =
+    r.action === 'BLOCK'
+
+      ? 'High-risk transaction. Recommend holding it for fraud-control review.'
+
+      : r.action === 'REVIEW'
+
+        ? 'Uncertain risk. Recommend additional verification before approval.'
+
+        : 'Low predicted fraud risk. Recommend approval under the current policy.';
+
+
+  $('decisionCopy').textContent =
+    copy;
+
+
+  $('resultFooter').textContent =
+    `Threshold policy: ${
+      r.action === 'APPROVE'
+        ? '< 1%'
+        : r.action === 'REVIEW'
+          ? '1% – < 19%'
+          : '≥ 19%'
+    }`;
+
+
+  $('heroProb').textContent =
+    `${pct}%`;
+
+
+  $('heroAction').textContent =
+    r.action;
+
+
+  $('heroAmount').textContent =
+    money(
+      currentTransaction.Amount
+    );
+
+
+  renderShap(
+    r.shap
+  );
+
+
+  document
+    .querySelector('#explain')
+    .scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+
+}
+
+
+/* =========================================================
+   SHAP
+   ========================================================= */
+
+function renderShap(items){
+
+  const list =
+    $('shapList');
+
+
+  $('shapSubtitle').textContent =
+    items.length
+
+      ? `Top ${Math.min(items.length,8)} local model contributions for this transaction.`
+
+      : 'The API returned no SHAP evidence for this transaction.';
+
+
+  if(!items.length){
+
+    list.innerHTML =
+      '<div class="technical-note">' +
+      'No SHAP values were returned by the API.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  const top =
+    items.slice(0,8);
+
+
+  const max =
+    Math.max(
+      ...top.map(
+        x =>
+          Math.abs(
+            Number(
+              x.shap_value ??
+              x.value ??
+              0
+            )
+          )
+      ),
+      .000001
+    );
+
+
+  list.innerHTML =
+    top.map(x => {
+
+      const feature =
+        x.feature ??
+        'signal';
+
+
+      const value =
+        Number(
+          x.shap_value ??
+          x.value ??
+          0
+        );
+
+
+      const positive =
+        value >= 0;
+
+
+      const width =
+        Math.max(
+          7,
+          Math.abs(value) /
+          max *
+          100
+        );
+
+
+      return `
+        <div class="shap-row">
+
+          <div class="shap-feature">
+            ${escapeHtml(feature)}
+          </div>
+
+          <div class="shap-track">
+
+            <div
+              class="shap-fill ${positive ? 'pos' : 'neg'}"
+              style="width:${width}%"
+            ></div>
+
+          </div>
+
+          <div
+            class="shap-value ${positive ? 'pos' : 'neg'}"
+          >
+            ${value >= 0 ? '+' : ''}
+            ${value.toFixed(4)}
+          </div>
+
+        </div>
+      `;
+
+    }).join('');
+
+}
+
+
+/* =========================================================
+   CSV PARSER
+   ========================================================= */
+
+function parseCSVLine(line){
+
+  const out = [];
+
+  let cur = '';
+
+  let quoted = false;
+
+
+  for(
+    let i=0;
+    i<line.length;
+    i++
+  ){
+
+    const c =
+      line[i];
+
+
+    if(c === '"'){
+
+      if(
+        quoted &&
+        line[i+1] === '"'
+      ){
+
+        cur += '"';
+
+        i++;
+
+      }else{
+
+        quoted =
+          !quoted;
+
+      }
+
+    }else if(
+      c === ',' &&
+      !quoted
+    ){
+
+      out.push(
+        cur.trim()
+      );
+
+      cur = '';
+
+    }else{
+
+      cur += c;
+
+    }
+
+  }
+
+
+  out.push(
+    cur.trim()
+  );
+
+
+  return out;
+
+}
+
+
+let csvFileRef = null;
+
+let csvHeaders = [];
+
+let csvRowCount = 0;
+
+let csvSampleRows = [];
+
+let csvRowOffsets = [];
+
+const CSV_PREVIEW_LIMIT = 100;
+
+const CSV_CHUNK_SIZE =
+  1024 * 1024;
+
+
+function csvLineToObject(line){
+
+  const vals =
+    parseCSVLine(line);
+
+  const row = {};
+
+
+  csvHeaders.forEach(
+    (h,j) => {
+
+      row[h] =
+        vals[j] ?? '';
+
+    }
+  );
+
+
+  return row;
+
+}
+
+
+function validateCSVRow(row){
+
+  const data = {};
+
+
+  for(
+    const feature of FEATURES
+  ){
+
+    const n =
+      Number(
+        row[feature]
+      );
+
+
+    if(!Number.isFinite(n)){
+
+      return null;
+
+    }
+
+
+    data[feature] =
+      n;
+
+  }
+
+
+  return data;
+
+}
+
+
+function readBlobText(blob){
+
+  return new Promise(
+    (resolve,reject) => {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        () => resolve(
+          reader.result
+        );
+
+
+      reader.onerror =
+        () => reject(
+          reader.error ||
+          new Error(
+            'Could not read the CSV file.'
+          )
+        );
+
+
+      reader.readAsText(
+        blob
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LOAD CSV
+   ========================================================= */
+
+async function loadCSV(){
+
+  const file =
+    $('csvFile').files[0];
+
+
+  if(!file){
+
+    showToast(
+      'Choose a CSV file first.'
+    );
+
+    return;
+
+  }
+
+
+  const btn =
+    $('csvLoadBtn');
+
+
+  const select =
+    $('csvSelect');
+
+
+  btn.disabled = true;
+
+  btn.textContent =
+    'Indexing...';
+
+
+  select.innerHTML =
+    '<option>Indexing transactions...</option>';
+
+
+  select.disabled = true;
+
+  $('csvRowBtn').disabled =
+    true;
+
+
+  $('csvProgress').style.width =
+    '0%';
+
+
+  $('csvStatus').textContent =
+    `Indexing ${file.name} without creating hundreds of thousands of DOM elements...`;
+
+
+  csvFileRef =
+    file;
+
+  csvHeaders = [];
+
+  csvRowCount = 0;
+
+  csvSampleRows = [];
+
+  csvRowOffsets = [];
+
+
+  try{
+
+    let bytePos = 0;
+
+    let carry = '';
+
+    let headerReady = false;
+
+    let processedRows = 0;
+
+
+    while(
+      bytePos < file.size
+    ){
+
+      const endPos =
+        Math.min(
+          bytePos +
+          CSV_CHUNK_SIZE,
+          file.size
+        );
+
+
+      const chunk =
+        await readBlobText(
+          file.slice(
+            bytePos,
+            endPos
+          )
+        );
+
+
+      let text =
+        carry + chunk;
+
+
+      let searchStart = 0;
+
+      let newlineIndex;
+
+
+      while(
+        (
+          newlineIndex =
+            text.indexOf(
+              '\n',
+              searchStart
+            )
+        ) !== -1
+      ){
+
+        let line =
+          text.slice(
+            searchStart,
+            newlineIndex
+          );
+
+
+        const lineStartGlobal =
+          bytePos -
+          carry.length +
+          searchStart;
+
+
+        const lineEndGlobal =
+          bytePos -
+          carry.length +
+          newlineIndex;
+
+
+        searchStart =
+          newlineIndex + 1;
+
+
+        if(
+          line.endsWith('\r')
+        ){
+
+          line =
+            line.slice(
+              0,
+              -1
+            );
+
+        }
+
+
+        if(!line.trim()){
+
+          continue;
+
+        }
+
+
+        if(!headerReady){
+
+          csvHeaders =
+            parseCSVLine(line)
+              .map(
+                x =>
+                  x
+                    .replace(
+                      /^\uFEFF/,
+                      ''
+                    )
+                    .trim()
+              );
+
+
+          const missing =
+            FEATURES.filter(
+              f =>
+                !csvHeaders.includes(f)
+            );
+
+
+          if(missing.length){
+
+            throw new Error(
+              `Missing required columns: ${missing.join(', ')}`
+            );
+
+          }
+
+
+          headerReady = true;
+
+          continue;
+
+        }
+
+
+        processedRows++;
+
+
+        csvRowOffsets.push({
+          start:
+            lineStartGlobal,
+
+          end:
+            lineEndGlobal
+        });
+
+
+        if(
+          csvSampleRows.length <
+          CSV_PREVIEW_LIMIT
+        ){
+
+          csvSampleRows.push(
+            csvLineToObject(line)
+          );
+
+        }
+
+
+        if(
+          processedRows % 10000 === 0
+        ){
+
+          const pct =
+            Math.min(
+              99,
+              (endPos / file.size) * 100
+            );
+
+
+          $('csvProgress').style.width =
+            `${pct}%`;
+
+
+          $('csvStatus').textContent =
+            `Indexed ${processedRows.toLocaleString()} transactions...`;
+
+
+          await new Promise(
+            requestAnimationFrame
+          );
+
+        }
+
+      }
+
+
+      carry =
+        text.slice(
+          searchStart
+        );
+
+
+      bytePos =
+        endPos;
+
+    }
+
+
+    if(carry.trim()){
+
+      const lineStartGlobal =
+        file.size -
+        carry.length;
+
+
+      let line =
+        carry;
+
+
+      if(line.endsWith('\r')){
+
+        line =
+          line.slice(
+            0,
+            -1
+          );
+
+      }
+
+
+      if(!headerReady){
+
+        csvHeaders =
+          parseCSVLine(line)
+            .map(
+              x =>
+                x
+                  .replace(
+                    /^\uFEFF/,
+                    ''
+                  )
+                  .trim()
+            );
+
+
+        const missing =
+          FEATURES.filter(
+            f =>
+              !csvHeaders.includes(f)
+          );
+
+
+        if(missing.length){
+
+          throw new Error(
+            `Missing required columns: ${missing.join(', ')}`
+          );
+
+        }
+
+
+        headerReady = true;
+
+      }else{
+
+        processedRows++;
+
+
+        csvRowOffsets.push({
+
+          start:
+            lineStartGlobal,
+
+          end:
+            file.size
+
+        });
+
+
+        if(
+          csvSampleRows.length <
+          CSV_PREVIEW_LIMIT
+        ){
+
+          csvSampleRows.push(
+            csvLineToObject(line)
+          );
+
+        }
+
+      }
+
+    }
+
+
+    csvRowCount =
+      processedRows;
+
+
+    if(!headerReady){
+
+      throw new Error(
+        'CSV header could not be read.'
+      );
+
+    }
+
+
+    if(csvRowCount === 0){
+
+      throw new Error(
+        'CSV contains no transaction rows.'
+      );
+
+    }
+
+
+    select.innerHTML =
+      '<option value="">Select a preview transaction</option>';
+
+
+    csvSampleRows.forEach(
+      (row,i) => {
+
+        const opt =
+          document.createElement(
+            'option'
+          );
+
+
+        opt.value =
+          String(i+1);
+
+
+        opt.textContent =
+          `Row ${i+1} · ${money(row.Amount)}`;
+
+
+        select.appendChild(
+          opt
+        );
+
+      }
+    );
+
+
+    select.disabled = false;
+
+    $('csvRowBtn').disabled =
+      false;
+
+
+    $('csvProgress').style.width =
+      '100%';
+
+
+    $('csvStatus').textContent =
+      `Loaded ${csvRowCount.toLocaleString()} transactions. ` +
+      `The browser keeps only row positions, not 284,000 dropdown items. ` +
+      `Use the preview or enter any row number.`;
+
+
+    showToast(
+      `CSV loaded: ${csvRowCount.toLocaleString()} transactions.`
+    );
+
+
+  }catch(error){
+
+    console.error(
+      'Reliable CSV load error:',
+      error
+    );
+
+
+    csvFileRef = null;
+
+    csvHeaders = [];
+
+    csvRowCount = 0;
+
+    csvSampleRows = [];
+
+    csvRowOffsets = [];
+
+
+    select.innerHTML =
+      '<option>Select a loaded transaction</option>';
+
+
+    select.disabled = true;
+
+    $('csvRowBtn').disabled =
+      true;
+
+    $('csvProgress').style.width =
+      '0%';
+
+
+    $('csvStatus').innerHTML =
+      `<strong>CSV could not be loaded.</strong><br>` +
+      `${escapeHtml(error.message || 'Unknown CSV error.')}`;
+
+
+    showToast(
+      'CSV could not be loaded.'
+    );
+
+
+  }finally{
+
+    btn.disabled = false;
+
+    btn.textContent =
+      'Load CSV';
+
+  }
+
+}
+
+
+/* =========================================================
+   GET CSV ROW
+   ========================================================= */
+
+async function getCSVRow(
+  rowNumber
+){
+
+  if(
+    !csvFileRef ||
+    !csvHeaders.length ||
+    !csvRowOffsets.length
+  ){
+
+    throw new Error(
+      'Load a CSV first.'
+    );
+
+  }
+
+
+  if(
+    !Number.isInteger(rowNumber) ||
+    rowNumber < 1 ||
+    rowNumber > csvRowCount
+  ){
+
+    throw new Error(
+      `Row must be between 1 and ${csvRowCount.toLocaleString()}.`
+    );
+
+  }
+
+
+  if(
+    rowNumber <=
+    csvSampleRows.length
+  ){
+
+    return csvSampleRows[
+      rowNumber - 1
+    ];
+
+  }
+
+
+  const offset =
+    csvRowOffsets[
+      rowNumber - 1
+    ];
+
+
+  if(!offset){
+
+    throw new Error(
+      `Could not locate CSV row ${rowNumber}.`
+    );
+
+  }
+
+
+  $('csvStatus').textContent =
+    `Loading transaction ${rowNumber.toLocaleString()}...`;
+
+
+  const line =
+    await readBlobText(
+      csvFileRef.slice(
+        offset.start,
+        offset.end
+      )
+    );
+
+
+  return csvLineToObject(
+    line
+  );
+
+}
+
+
+/* =========================================================
+   LOAD CSV ROW INTO CONSOLE
+   ========================================================= */
+
+async function loadCSVRow(){
+
+  const value =
+    Number(
+      $('csvRowNumber').value
+    );
+
+
+  if(
+    !Number.isInteger(value) ||
+    value < 1 ||
+    value > csvRowCount
+  ){
+
+    showToast(
+      csvRowCount
+        ? `Enter a row between 1 and ${csvRowCount.toLocaleString()}.`
+        : 'Load a CSV first.'
+    );
+
+    return;
+
+  }
+
+
+  const btn =
+    $('csvRowBtn');
+
+
+  btn.disabled = true;
+
+  btn.textContent =
+    'Loading...';
+
+
+  try{
+
+    const row =
+      await getCSVRow(
+        value
+      );
+
+
+    const transaction =
+      validateCSVRow(
+        row
+      );
+
+
+    if(!transaction){
+
+      throw new Error(
+        `Row ${value} contains a missing or non-numeric model value.`
+      );
+
+    }
+
+
+    currentTransaction =
+      transaction;
+
+
+    currentScenario =
+      'csv';
+
+
+    $('txId').textContent =
+      `CSV-${value
+        .toString()
+        .padStart(6,'0')}`;
+
+
+    $('txAmount').textContent =
+      money(
+        transaction.Amount
+      );
+
+
+    $('txTime').textContent =
+      timeFromSeconds(
+        transaction.Time
+      );
+
+
+    $('heroAmount').textContent =
+      money(
+        transaction.Amount
+      );
+
+
+    $('heroProb').textContent =
+      '—';
+
+
+    $('heroAction').textContent =
+      'ANALYZE';
+
+
+    $('transactionStatus').innerHTML =
+      '<span class="loaded-dot"></span>' +
+      ' CSV transaction loaded · ready to analyze.';
+
+
+    $('resultFooter').textContent =
+      'CSV transaction loaded. Click Analyze transaction to run the model.';
+
+
+    resetResult(false);
+
+
+    showToast(
+      `CSV row ${value.toLocaleString()} loaded.`
+    );
+
+
+  }catch(error){
+
+    console.error(
+      'CSV row error:',
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      'Could not load this CSV row.'
+    );
+
+
+  }finally{
+
+    btn.disabled =
+      !csvFileRef;
+
+    btn.textContent =
+      'Load this row';
+
+  }
+
+}
+
+
+/* =========================================================
+   CSV DROPDOWN
+   ========================================================= */
+
+$('csvSelect').addEventListener(
+  'change',
+  async e => {
+
+    if(!e.target.value){
+      return;
+    }
+
+
+    const rowNumber =
+      Number(
+        e.target.value
+      );
+
+
+    $('csvRowNumber').value =
+      rowNumber;
+
+
+    await loadCSVRow();
+
+  }
+);
+
+
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
+
+checkAPI();
+
+loadDemo(
+  'fraud',
+  false
+);
+
+setInterval(
+  checkAPI,
+  15000
+);
+
+</script>
+
+</body>
+</html>
