@@ -18,3 +18,5 @@ __pycache__/
 
 # Large dataset
 data/creditcard.csv
+
+models/train_test_split.pkl
